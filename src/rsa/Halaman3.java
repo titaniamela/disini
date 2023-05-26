@@ -175,6 +175,8 @@ public class Halaman3 extends javax.swing.JFrame {
             RSA.main(new String[]{});
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Halaman1.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Halaman3.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }//GEN-LAST:event_HashActionPerformed
@@ -194,7 +196,9 @@ public class Halaman3 extends javax.swing.JFrame {
             RSA.main(new String[]{});
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Halaman1.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (IOException ex) {
+           Logger.getLogger(Halaman3.class.getName()).log(Level.SEVERE, null, ex);
+       }
         JOptionPane.showMessageDialog(this, "DONE!! \n Digital Signature tersimpan ke dalam file", "Info", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
         /*int response = JOptionPane.showConfirmDialog(this, "Digital signature Disimpan. Apakah Anda ingin melakukan verifikasi sekarang?", "Info", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);

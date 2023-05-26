@@ -1,11 +1,14 @@
 package rsa;
 
+import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 
@@ -211,6 +214,8 @@ public class Halaman1 extends javax.swing.JFrame {
             RSA.main(new String[]{});
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Halaman1.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Halaman1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_GetKeyActionPerformed
 
@@ -219,7 +224,7 @@ public class Halaman1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Klik Generate Key terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        try (FileWriter writer = new FileWriter("public_key.txt")) {    
+       /* try (FileWriter writer = new FileWriter("public_key.txt")) {    
             writer.write("Public key (e,n): " + KPublik.getText());
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -228,12 +233,61 @@ public class Halaman1 extends javax.swing.JFrame {
            writer.write("Private key (d,n): " + KPrivat.getText())  ;
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-        JOptionPane.showMessageDialog(this, "Kunci telah disimpan ke File", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }*/
+       JFileChooser fileChooser = new JFileChooser();
+       fileChooser.setDialogTitle("Simpan Kunci");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
+        fileChooser.setFileFilter(filter);
         
-       Halaman2 hal2 = new Halaman2();
-       hal2.setVisible(true);
-       this.setVisible(false);
+        JOptionPane.showMessageDialog(this, "Masukkan nama file untuk menyimpan kunci", "Info", JOptionPane.INFORMATION_MESSAGE);
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\Shania\\OneDrive\\Documents\\NetBeansProjects\\satu\\hasil\\key"));
+        
+        boolean fileSaved = false;
+    while (!fileSaved) {
+        int returnValue = fileChooser.showSaveDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            String publicFilePath = fileChooser.getSelectedFile().getAbsolutePath() + "_public.txt";
+            String privateFilePath = fileChooser.getSelectedFile().getAbsolutePath() + "_private.txt";
+
+            if (publicFilePath.isEmpty() || privateFilePath.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nama file tidak valid!", "Error", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+
+            File publicFile = new File(publicFilePath);
+            File privateFile = new File(privateFilePath);
+
+            if (publicFile.exists() || privateFile.exists()) {
+                int overwriteOption = JOptionPane.showConfirmDialog(this, "Nama file sudah ada. Apakah Anda ingin menimpanya?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (overwriteOption == JOptionPane.NO_OPTION) {
+                    continue;
+                }
+            }
+
+            try (FileWriter publicWriter = new FileWriter(publicFilePath)) {    
+                publicWriter.write("Public key (e,n): " + KPublik.getText());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            try (FileWriter privateWriter = new FileWriter(privateFilePath)) {
+                privateWriter.write("Private key (d,n): " + KPrivat.getText());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "Kunci telah disimpan", "Info", JOptionPane.INFORMATION_MESSAGE); 
+            fileSaved = true;
+            /*Halaman2 hal2 = new Halaman2();
+            hal2.setVisible(true);
+            this.setVisible(false);*/
+            Hal2 hal2 = new Hal2();
+            hal2.setVisible(true);
+            this.setVisible(false);
+            }else {
+                    JOptionPane.showMessageDialog(this, "Simpan kunci dibatalkan", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    fileSaved = true;
+            }  
+    }
     }//GEN-LAST:event_SaveKeyActionPerformed
 
     /**

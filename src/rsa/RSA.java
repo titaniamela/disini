@@ -10,19 +10,24 @@ package rsa;
  * @author Shania
  */
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import javax.swing.JFileChooser;
 
 public class RSA {
     private static final int CERTAINTY = 10;
     private static final int KEY_LENGTH = 64;
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
         // generate primes
         BigInteger p = generatePrime();
         BigInteger q = generatePrime();
@@ -48,10 +53,12 @@ public class RSA {
         // hash message
         //Halaman2.txtDisplay.setText(Halaman2.txtDisplay.getText());
         //Halaman3.txtContent.setText(Halaman2.txtDisplay.getText());
-        String message = Halaman3.txtContent.getText();
+        /*String message = Halaman3.txtContent.getText();
         byte[] hash = sha256(message.getBytes(StandardCharsets.UTF_8));
-        Halaman3.txtDigest.setText(bytesToHex(hash));
+        Halaman3.txtDigest.setText(bytesToHex(hash));*/
         //System.out.println("Hash: " + bytesToHex(hash));
+        String  filePath = Hal2.txtPATH.getText();
+        byte[] hash = calculateFileHash(filePath);
        
         
         // encrypt hash with private key
@@ -59,17 +66,24 @@ public class RSA {
         //Halaman4.txtFinal.setText(encryptedHash.toString());
         
         // write digital signature and public key to file
-        try (FileWriter writer = new FileWriter("Digital_Signature.txt")) {    
+        /*try (FileWriter writer = new FileWriter("Digital_Signature.txt")) {    
             //writer.write("Original Message: " + message + "\n \n");
             writer.write("Digital Signature: " + encryptedHash.toString() + "\n \n");
             //writer.write("Public Key (e,n): " + "(" + e + "," + n + ")");
             //String publicKeyString = Halaman1.KPublik.getText().replaceAll("\\s", ""); // hapus whitespace
             //writer.write("Public Key (e,n): " + publicKeyString);
-            writer.write("Public Key (e,n): " + Halaman1.KPublik.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
+            //writer.write("Public Key (e,n): " + Halaman1.KPublik.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }*/
+        String signatureFilePath = getSignatureFilePath(filePath);
+        try (FileWriter writer = new FileWriter(signatureFilePath)) {
+            writer.write("Digital Signature: " + encryptedHash.toString() + "\n");
+            //writer.write("Public Key (e,n): " + Halaman1.KPublik.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+       
         
     }
 
@@ -99,12 +113,19 @@ public class RSA {
         return e.modInverse(phiN);
     }
 
-    private static byte[] sha256(byte[] message) throws NoSuchAlgorithmException {
+    /*private static byte[] sha256(byte[] message) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         return digest.digest(message);
+    }*/
+    private static byte[] calculateFileHash(String filePath) throws NoSuchAlgorithmException, IOException {
+        Path path = Paths.get(filePath);
+        byte[] fileData = Files.readAllBytes(path);
+
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        return digest.digest(fileData);
     }
 
-    private static String bytesToHex(byte[] bytes) {
+   /* private static String bytesToHex(byte[] bytes) {
         StringBuilder builder = new StringBuilder();
 
         for (byte b : bytes) {
@@ -112,5 +133,10 @@ public class RSA {
         }
 
         return builder.toString();
+    }*/
+    private static String getSignatureFilePath(String filePath) {
+        int dotIndex = filePath.lastIndexOf('.');
+        String signatureFilePath = filePath.substring(0, dotIndex) + ".signature.txt";
+        return signatureFilePath;
     }
 }
