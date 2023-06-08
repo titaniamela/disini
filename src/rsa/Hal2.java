@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import static rsa.Halaman2.txtPath;
 
 /**
  *
@@ -133,7 +134,7 @@ public class Hal2 extends javax.swing.JFrame {
         if(pfile == JFileChooser.APPROVE_OPTION){
         File file = dialog.getSelectedFile();
             try {
-                txtPATH.setText(file.getAbsolutePath());
+                //txtPATH.setText(file.getAbsolutePath());
             } catch (Exception e){
                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memilih file:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();

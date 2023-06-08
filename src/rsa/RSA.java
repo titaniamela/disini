@@ -22,6 +22,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class RSA {
     private static final int CERTAINTY = 10;
@@ -96,12 +97,18 @@ public class RSA {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         return digest.digest(message);
     }*/
-    private static byte[] calculateFileHash(String filePath) throws NoSuchAlgorithmException, IOException {
+
+    private static byte[] calculateFileHash(String filePath) {
+        try{
         Path path = Paths.get(filePath);
         byte[] fileData = Files.readAllBytes(path);
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         return digest.digest(fileData);
+        } catch (NoSuchAlgorithmException | IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
    /* private static String bytesToHex(byte[] bytes) {

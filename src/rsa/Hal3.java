@@ -172,14 +172,14 @@ public class Hal3 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Klik tombol Load Key terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }else{
-       // RSAVerif.main(new String[]{});
-        try {
+        RSAVerif.main(new String[]{});
+       /* try {
                 RSAVerification.main(new String[]{});
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(Hal3.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Hal3.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         }
     }//GEN-LAST:event_VerifActionPerformed
 
