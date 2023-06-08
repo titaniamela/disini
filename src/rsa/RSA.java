@@ -33,8 +33,6 @@ public class RSA {
         BigInteger q = generatePrime();
         Halaman1.bilP.setText(p.toString());
         Halaman1.bilQ.setText(q.toString());
-        //System.out.println("p: " + p);
-        //System.out.println("q: " + q);
 
         // calculate n and phi(n)
         BigInteger n = p.multiply(q);
@@ -44,18 +42,12 @@ public class RSA {
         BigInteger e = generatePublicKey(phiN);
         BigInteger d = generatePrivateKey(e, phiN);
         Halaman1.bilE.setText(e.toString());
-        //System.out.println("e: " + e);
         Halaman1.KPublik.setText("(" + e + "," + n + ")");
         Halaman1.KPrivat.setText("(" + d + "," + n + ")");
-        //System.out.println("Public key (e,n): (" + e + "," + n + ")");
-        //System.out.println("Private key (d,n): (" + d + "," + n + ")");
 
         // hash message
-        //Halaman2.txtDisplay.setText(Halaman2.txtDisplay.getText());
-        //Halaman3.txtContent.setText(Halaman2.txtDisplay.getText());
         /*String message = Halaman3.txtContent.getText();
-        byte[] hash = sha256(message.getBytes(StandardCharsets.UTF_8));
-        Halaman3.txtDigest.setText(bytesToHex(hash));*/
+        byte[] hash = sha256(message.getBytes(StandardCharsets.UTF_8));*/
         //System.out.println("Hash: " + bytesToHex(hash));
         String  filePath = Hal2.txtPATH.getText();
         byte[] hash = calculateFileHash(filePath);
@@ -63,23 +55,10 @@ public class RSA {
         
         // encrypt hash with private key
         BigInteger encryptedHash = new BigInteger(hash).modPow(d, n);
-        //Halaman4.txtFinal.setText(encryptedHash.toString());
-        
-        // write digital signature and public key to file
-        /*try (FileWriter writer = new FileWriter("Digital_Signature.txt")) {    
-            //writer.write("Original Message: " + message + "\n \n");
-            writer.write("Digital Signature: " + encryptedHash.toString() + "\n \n");
-            //writer.write("Public Key (e,n): " + "(" + e + "," + n + ")");
-            //String publicKeyString = Halaman1.KPublik.getText().replaceAll("\\s", ""); // hapus whitespace
-            //writer.write("Public Key (e,n): " + publicKeyString);
-            //writer.write("Public Key (e,n): " + Halaman1.KPublik.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }*/
+       
         String signatureFilePath = getSignatureFilePath(filePath);
         try (FileWriter writer = new FileWriter(signatureFilePath)) {
             writer.write("Digital Signature: " + encryptedHash.toString() + "\n");
-            //writer.write("Public Key (e,n): " + Halaman1.KPublik.getText().replaceAll("\\(", "").replaceAll("\\)", ""));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

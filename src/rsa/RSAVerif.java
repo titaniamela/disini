@@ -57,12 +57,6 @@ public class RSAVerif {
 
         // Verifikasi digital signature
         boolean isValid = decryptedSignature.equals(calculatedHash);
-        /*boolean isValid = verifySignature(publicKey, signaturePath, messagePath);
-        if (isValid) {
-            JOptionPane.showMessageDialog(null, "Digital signature valid.", "Valid", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Digital signature tidak valid.", "Tidak Valid", JOptionPane.ERROR_MESSAGE);
-        }*/
         return isValid;
     }
 

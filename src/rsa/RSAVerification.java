@@ -62,9 +62,9 @@ public class RSAVerification {
         // Compare the trimmed signature and the original hash
         boolean signatureValid = MessageDigest.isEqual(trimmedSignatureBytes, originalHash);
         if (signatureValid) {
-            JOptionPane.showMessageDialog(null, "Digital signature valid.", "Valid", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Digital signature valid." + signatureValid, "Valid", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Digital signature tidak valid.", "Tidak Valid", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Digital signature tidak valid." + signatureValid, "Tidak Valid", JOptionPane.ERROR_MESSAGE);
         }
 
         // Print the verification result

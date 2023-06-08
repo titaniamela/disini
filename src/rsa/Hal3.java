@@ -172,28 +172,15 @@ public class Hal3 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Klik tombol Load Key terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }else{
-        RSAVerif.main(new String[]{});
-       /* try {
+       // RSAVerif.main(new String[]{});
+        try {
                 RSAVerification.main(new String[]{});
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(Hal3.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Hal3.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
         }
-        
-        /*String publicKey = Halaman1.KPublik.getText();
-        String signaturePath = tsign.getText();
-        String messagePath = tdata.getText();
-        
-        boolean isValid = RSASignatureVerification.verifySignature(publicKey, signaturePath, messagePath);
-        
-    // Tampilkan notifikasi hasil verifikasi
-    if (isValid) {
-        JOptionPane.showMessageDialog(this, "Digital signature valid. Pesan asli tidak berubah.", "Verifikasi Signature", JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        JOptionPane.showMessageDialog(this, "Digital signature tidak valid. Pesan asli telah diubah.", "Verifikasi Signature", JOptionPane.ERROR_MESSAGE);
-    }*/
     }//GEN-LAST:event_VerifActionPerformed
 
     private void LPubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LPubActionPerformed

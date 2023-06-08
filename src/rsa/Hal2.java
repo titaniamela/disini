@@ -133,11 +133,9 @@ public class Hal2 extends javax.swing.JFrame {
         if(pfile == JFileChooser.APPROVE_OPTION){
         File file = dialog.getSelectedFile();
             try {
-                //txtPATH.setText("" +file);
                 txtPATH.setText(file.getAbsolutePath());
             } catch (Exception e){
-                //System.out.println("Error :" +e.getMessage());
-                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memilih file:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+               JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memilih file:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             }
         }
@@ -174,7 +172,6 @@ public class Hal2 extends javax.swing.JFrame {
         }
        JOptionPane.showMessageDialog(this, "Digital Signature tersimpan ke dalam file", "Info", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
-        
     }
     Hal3 hal3 = new Hal3();
             hal3.setVisible(true);

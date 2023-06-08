@@ -224,16 +224,6 @@ public class Halaman1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Klik Generate Key terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-       /* try (FileWriter writer = new FileWriter("public_key.txt")) {    
-            writer.write("Public key (e,n): " + KPublik.getText());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        try (FileWriter writer = new FileWriter("private_key.txt")) {
-           writer.write("Private key (d,n): " + KPrivat.getText())  ;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }*/
        JFileChooser fileChooser = new JFileChooser();
        fileChooser.setDialogTitle("Simpan Kunci");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
@@ -277,14 +267,12 @@ public class Halaman1 extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(this, "Kunci telah disimpan", "Info", JOptionPane.INFORMATION_MESSAGE); 
             fileSaved = true;
-            /*Halaman2 hal2 = new Halaman2();
-            hal2.setVisible(true);
-            this.setVisible(false);*/
+            
             Hal2 hal2 = new Hal2();
             hal2.setVisible(true);
             this.setVisible(false);
             }else {
-                    JOptionPane.showMessageDialog(this, "Simpan kunci dibatalkan", "Info", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Simpan kunci dibatalkan", "Info", JOptionPane.INFORMATION_MESSAGE);
                     fileSaved = true;
             }  
     }
