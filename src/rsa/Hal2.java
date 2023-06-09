@@ -11,14 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import static rsa.Halaman2.txtPath;
 
 /**
  *
  * @author Shania
  */
 public class Hal2 extends javax.swing.JFrame {
-    JFileChooser dialog = new JFileChooser();
+    //JFileChooser dialog = new JFileChooser();
 
     /**
      * Creates new form Hal2
@@ -128,16 +127,22 @@ public class Hal2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadDataActionPerformed
+        JFileChooser dialog = new JFileChooser();
         dialog.setCurrentDirectory(new File("C:\\Users\\Shania\\OneDrive\\Documents\\NetBeansProjects\\satu\\hasil\\sources"));
-        int pfile = dialog.showOpenDialog(this);
+        int result = dialog.showOpenDialog(this);
         
-        if(pfile == JFileChooser.APPROVE_OPTION){
-        File file = dialog.getSelectedFile();
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = dialog.getSelectedFile();
             try {
-                //txtPATH.setText(file.getAbsolutePath());
-            } catch (Exception e){
-               JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memilih file:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+                String filePath = file.getAbsolutePath();
+                txtPATH.setText(filePath);
+
+                // Memanggil metode calculateFileHash dari RSA
+                byte[] hash = RSA.calculateFileHash(filePath);
+                // Lakukan operasi yang sesuai dengan hash file
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memilih file:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
             }
         }
     }//GEN-LAST:event_LoadDataActionPerformed

@@ -10,19 +10,16 @@ package rsa;
  * @author Shania
  */
 
-import java.io.File;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class RSA {
     private static final int CERTAINTY = 10;
@@ -63,8 +60,6 @@ public class RSA {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-       
-        
     }
 
     private static BigInteger generatePrime() {
@@ -98,7 +93,7 @@ public class RSA {
         return digest.digest(message);
     }*/
 
-    private static byte[] calculateFileHash(String filePath) {
+    public static byte[] calculateFileHash(String filePath) {
         try{
         Path path = Paths.get(filePath);
         byte[] fileData = Files.readAllBytes(path);
