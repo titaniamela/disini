@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import static rsa.Hal2.txtPATH;
 
 public class RSA {
     private static final int CERTAINTY = 10;
@@ -47,7 +48,7 @@ public class RSA {
         /*String message = Halaman3.txtContent.getText();
         byte[] hash = sha256(message.getBytes(StandardCharsets.UTF_8));*/
         //System.out.println("Hash: " + bytesToHex(hash));
-        String  filePath = Hal2.txtPATH.getText();
+        String  filePath = txtPATH.getText();
         byte[] hash = calculateFileHash(filePath);
        
         
