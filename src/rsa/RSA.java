@@ -9,8 +9,6 @@ package rsa;
  *
  * @author Shania
  */
-
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -20,13 +18,16 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import javax.swing.JTextField;
 import static rsa.Hal2.txtPATH;
 
 public class RSA {
     private static final int CERTAINTY = 10;
     private static final int KEY_LENGTH = 64;
+    private static BigInteger encryptedHash;
 
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
+        
         // generate primes
         BigInteger p = generatePrime();
         BigInteger q = generatePrime();
@@ -45,15 +46,11 @@ public class RSA {
         Halaman1.KPrivat.setText("(" + d + "," + n + ")");
 
         // hash message
-        /*String message = Halaman3.txtContent.getText();
-        byte[] hash = sha256(message.getBytes(StandardCharsets.UTF_8));*/
-        //System.out.println("Hash: " + bytesToHex(hash));
         String  filePath = txtPATH.getText();
         byte[] hash = calculateFileHash(filePath);
        
-        
         // encrypt hash with private key
-        BigInteger encryptedHash = new BigInteger(hash).modPow(d, n);
+        encryptedHash = new BigInteger(hash).modPow(d, n);
        
         String signatureFilePath = getSignatureFilePath(filePath);
         try (FileWriter writer = new FileWriter(signatureFilePath)) {
@@ -70,7 +67,6 @@ public class RSA {
         while (!prime.isProbablePrime(CERTAINTY)) {
             prime = new BigInteger(KEY_LENGTH, CERTAINTY, random);
         }
-
         return prime;
     }
 
@@ -81,19 +77,13 @@ public class RSA {
         while (!phiN.gcd(e).equals(BigInteger.ONE)) {
             e = BigInteger.probablePrime(phiN.bitLength() - 1, random);
         }
-
         return e;
     }
 
     private static BigInteger generatePrivateKey(BigInteger e, BigInteger phiN) {
         return e.modInverse(phiN);
     }
-
-    /*private static byte[] sha256(byte[] message) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        return digest.digest(message);
-    }*/
-
+    
     public static byte[] calculateFileHash(String filePath) {
         try{
         Path path = Paths.get(filePath);
@@ -106,19 +96,14 @@ public class RSA {
         }
         return null;
     }
-
-   /* private static String bytesToHex(byte[] bytes) {
-        StringBuilder builder = new StringBuilder();
-
-        for (byte b : bytes) {
-            builder.append(String.format("%02x", b));
-        }
-
-        return builder.toString();
-    }*/
+    
     private static String getSignatureFilePath(String filePath) {
         int dotIndex = filePath.lastIndexOf('.');
         String signatureFilePath = filePath.substring(0, dotIndex) + ".signature.txt";
         return signatureFilePath;
+    }
+    
+    public static BigInteger getEncryptedHash(){
+        return encryptedHash;
     }
 }

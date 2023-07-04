@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
  * @author Shania
  */
 public class Hal2 extends javax.swing.JFrame {
-    //JFileChooser dialog = new JFileChooser();
 
     /**
      * Creates new form Hal2
@@ -44,6 +43,7 @@ public class Hal2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sources");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/image/logo6.png")).getImage());
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Sitka Display", 1, 20)); // NOI18N
@@ -136,10 +136,6 @@ public class Hal2 extends javax.swing.JFrame {
             try {
                 String filePath = file.getAbsolutePath();
                 txtPATH.setText(filePath);
-
-                // Memanggil metode calculateFileHash dari RSA
-                byte[] hash = RSA.calculateFileHash(filePath);
-                // Lakukan operasi yang sesuai dengan hash file
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memilih file:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
@@ -179,9 +175,13 @@ public class Hal2 extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(this, "Digital Signature tersimpan ke dalam file", "Info", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }
-    Hal3 hal3 = new Hal3();
+            Halaman3Lain hal3 = new Halaman3Lain();
             hal3.setVisible(true);
             this.setVisible(false);
+            
+            /*Hal3Lain hal3 = new Hal3Lain();
+            hal3.setVisible(true);
+            this.setVisible(false);*/
     }//GEN-LAST:event_SignActionPerformed
 
     /**

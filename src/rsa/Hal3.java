@@ -168,11 +168,11 @@ public class Hal3 extends javax.swing.JFrame {
         if (tdata.getText().isEmpty() || tsign.getText().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Pilih file terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
-    }else if (!LPub.isSelected()) {
+        }else if (!LPub.isSelected()) {
         JOptionPane.showMessageDialog(this, "Klik tombol Load Key terlebih dahulu.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
-    }else{
-        RSAVerif.main(new String[]{});
+        }else{
+            RSAVerif.main(new String[]{});
        /* try {
                 RSAVerification.main(new String[]{});
             } catch (NoSuchAlgorithmException ex) {
