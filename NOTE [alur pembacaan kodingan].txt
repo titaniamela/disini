@@ -1,6 +1,6 @@
 Kodingan yang dipakai
 - Halaman1.java 	(halaman pertama aplikasi)
 - Hal2.java		(halaman kedua aplikasi)
-- Hal3.java		(halaman ketiga aplikasi)
+- Halaman3Lain.java		(halaman ketiga aplikasi)
 - RSA.java		(proses digital signature)
-- RSAVerif.java		(proses verifikasi)
+- iniVerif.java		(proses verifikasi)
